@@ -11,14 +11,14 @@ const initialState: initState = {
 };
 
 export const getAllUser = createAsyncThunk("user/getAllUser", async () => {
-  const res = await axios.get("http://localhost:4000/users");
+  const res = await axios.get("https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/users");
   // console.log(res.data);
   return res.data;
 });
 export const register = createAsyncThunk(
   "user/register",
   async (newUser: Omit<IUser, "id">) => {
-    const res = await axios.post("http://localhost:4000/users", newUser);
+    const res = await axios.post("https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/users", newUser);
     return res.data;
   }
 );
