@@ -4,8 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { RootState } from "../../redux/store";
-import { AcceptLogin } from "../../redux/userSlice";
-import { useState } from "react";
+import { AcceptLogin, getAllUser } from "../../redux/userSlice";
+import { useEffect, useState } from "react";
 import { Toast } from "../../Util/toastify";
 import { ToastContainer } from "react-toastify";
 interface LoginInfo {
@@ -25,7 +25,9 @@ function Login() {
       return navigate("/");
     }, 1500);
   };
-
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, [dispatch]);
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -185,7 +187,7 @@ function Login() {
                     }}
                   >
                     SIGN UP
-                  </Button>                 
+                  </Button>
                 </Stack>
               </Box>
             </Stack>
