@@ -1,0 +1,18 @@
+@media only screen and (max-width: 330px) {
+  .prod-model-img {
+    width: 80px;
+  }
+  .text-model {
+    font-size: 12px!important;
+  }
+  .input-model {
+    width: 20px !important;
+  }
+  .iconbtn-model {
+    padding: 0 !important;
+  }
+  .quantity-modal {
+    width: 15px;
+    height: 15px;
+  }
+}

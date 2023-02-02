@@ -1,0 +1,15 @@
+.abc{
+    width: 50px;
+    color: #6c6c6c;
+    display: flex !important;
+    margin: 15px auto 0 auto;
+    justify-content: space-around;
+    margin-top: 2%;
+}
+
+.abc button{
+    display: none;
+}
+.abc .slick-active{
+    color: #fff;
+}

@@ -1,0 +1,10 @@
+@media only screen and (max-width: 330px) {
+   .container-prod-modal{
+    height: 200px!important;
+   }
+   .btn-cart-modal{
+     padding-top: 5px !important;
+     padding-bottom: 5px !important;
+
+   }
+  }

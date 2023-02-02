@@ -1,0 +1,10 @@
+
+.product:hover{
+   background-color: rgb(0, 0, 0);
+}
+.product:hover  .box-product-button{
+    display: block;
+}
+.product:hover  .box-product-detail{
+display: none;
+}

@@ -1,0 +1,16 @@
+@media only screen and (max-width: 610px) {
+  .prod-car-img {
+    width: 230px;
+  }
+  .price {
+    width: 230px!important;
+  }
+}
+@media only screen and (min-width: 610px) {
+  .prod-car-img {
+    width: 300px;
+  }
+  .price {
+    width: 300px!important;
+  }
+}

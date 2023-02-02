@@ -1,0 +1,350 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Acer Aspire 7",
+      "category": "Acer",
+      "price": 15600000,
+      "rate": 3.25,
+      "imageUrl1": "/imgs/acer/acer-aspire7-1.jpg",
+      "imageUrl2": "/imgs/acer/acer-aspire7-2.jpg",
+      "imageUrl3": "/imgs/acer/acer-aspire7-3.jpg",
+      "imageUrl4": "/imgs/acer/acer-aspire7-4.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Acer Nitro 5",
+      "price": 28700000,
+      "rate": 5,
+      "category": "Acer",
+      "imageUrl1": "/imgs/acer/acer-nitro5-1.jpg",
+      "imageUrl2": "/imgs/acer/acer-nitro5-2.jpg",
+      "imageUrl3": "/imgs/acer/acer-nitro5-3.jpg",
+      "imageUrl4": "/imgs/acer/acer-nitro5-4.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Acer Predator Triton",
+      "price": 28100000,
+      "rate": 3.75,
+      "category": "Acer",
+      "imageUrl1": "/imgs/acer/acer-predator-triton-1.jpg",
+      "imageUrl2": "/imgs/acer/acer-predator-triton-2.jpg",
+      "imageUrl3": "/imgs/acer/acer-predator-triton-3.jpg",
+      "imageUrl4": "/imgs/acer/acer-predator-triton-4.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Acer Swift 3",
+      "price": 20600000,
+      "rate": 4,
+      "category": "Acer",
+      "imageUrl1": "/imgs/acer/acer-swift3-1.jpg",
+      "imageUrl2": "/imgs/acer/acer-swift3-2.jpg",
+      "imageUrl3": "/imgs/acer/acer-swift3-3.jpg",
+      "imageUrl4": "/imgs/acer/acer-swift3-4.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Asus Rog Strix",
+      "price": 29600000,
+      "rate": 4,
+      "category": "Asus",
+      "imageUrl1": "/imgs/asus/asus-rogstrix-1.jpg",
+      "imageUrl2": "/imgs/asus/asus-rogstrix-2.jpg",
+      "imageUrl3": "/imgs/asus/asus-rogstrix-3.jpg",
+      "imageUrl4": "/imgs/asus/asus-rogstrix-4.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Asus Tuf",
+      "price": 20600000,
+      "rate": 3,
+      "category": "Asus",
+      "imageUrl1": "/imgs/asus/asus-tuf-1.jpg",
+      "imageUrl2": "/imgs/asus/asus-tuf-2.jpg",
+      "imageUrl3": "/imgs/asus/asus-tuf-3.jpg",
+      "imageUrl4": "/imgs/asus/asus-tuf-4.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Asus Vivobook",
+      "price": 23600000,
+      "rate": 4,
+      "category": "Asus",
+      "imageUrl1": "/imgs/asus/asus-vivobook-1.jpg",
+      "imageUrl2": "/imgs/asus/asus-vivobook-2.jpg",
+      "imageUrl3": "/imgs/asus/asus-vivobook-3.jpg",
+      "imageUrl4": "/imgs/asus/asus-vivobook-4.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Asus Zenbook",
+      "price": 27600000,
+      "rate": 5,
+      "category": "Asus",
+      "imageUrl1": "/imgs/asus/asus-zenbook-pro-1.jpg",
+      "imageUrl2": "/imgs/asus/asus-zenbook-pro-2.jpg",
+      "imageUrl3": "/imgs/asus/asus-zenbook-pro-3.jpg",
+      "imageUrl4": "/imgs/asus/asus-zenbook-pro-4.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Dell Alienware m15",
+      "price": 28000000,
+      "rate": 5,
+      "category": "Dell",
+      "imageUrl1": "/imgs/dell/dell-alienware-m15-1.jpg",
+      "imageUrl2": "/imgs/dell/dell-alienware-m15-2.jpg",
+      "imageUrl3": "/imgs/dell/dell-alienware-m15-3.jpg",
+      "imageUrl4": "/imgs/dell/dell-alienware-m15-4.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Dell Inspiron 15",
+      "price": 16800000,
+      "rate": 5,
+      "category": "Dell",
+      "imageUrl1": "/imgs/dell/dell-inspiron15-1.jpg",
+      "imageUrl2": "/imgs/dell/dell-inspiron15-2.jpg",
+      "imageUrl3": "/imgs/dell/dell-inspiron15-3.jpg",
+      "imageUrl4": "/imgs/dell/dell-inspiron15-4.jpg"
+    },
+    {
+      "id": "11",
+      "name": "Dell Vostro",
+      "price": 26800000,
+      "rate": 5,
+      "category": "Dell",
+      "imageUrl1": "/imgs/dell/dell-vostro-1.jpg",
+      "imageUrl2": "/imgs/dell/dell-vostro-2.jpg",
+      "imageUrl3": "/imgs/dell/dell-vostro-3.jpg",
+      "imageUrl4": "/imgs/dell/dell-vostro-4.jpg"
+    },
+    {
+      "id": "12",
+      "name": "Dell XPS 17",
+      "price": 24100000,
+      "rate": 3,
+      "category": "Dell",
+      "imageUrl1": "/imgs/dell/dell-xps17-1.jpg",
+      "imageUrl2": "/imgs/dell/dell-xps17-2.jpg",
+      "imageUrl3": "/imgs/dell/dell-xps17-3.jpg",
+      "imageUrl4": "/imgs/dell/dell-xps17-4.jpg"
+    },
+    {
+      "id": "13",
+      "name": "HP Elitebook",
+      "price": 25400000,
+      "rate": 4,
+      "category": "HP",
+      "imageUrl1": "/imgs/hp/hp-elitebook-1.jpg",
+      "imageUrl2": "/imgs/hp/hp-elitebook-2.jpg",
+      "imageUrl3": "/imgs/hp/hp-elitebook-3.jpg",
+      "imageUrl4": "/imgs/hp/hp-elitebook-4.jpg"
+    },
+    {
+      "id": "14",
+      "name": "HP Envy",
+      "price": 15400000,
+      "rate": 5,
+      "category": "HP",
+      "imageUrl1": "/imgs/hp/hp-envy-1.jpg",
+      "imageUrl2": "/imgs/hp/hp-envy-2.jpg",
+      "imageUrl3": "/imgs/hp/hp-envy-3.jpg",
+      "imageUrl4": "/imgs/hp/hp-envy-4.jpg"
+    },
+    {
+      "id": "15",
+      "name": "HP Probook",
+      "price": 27400000,
+      "rate": 3,
+      "category": "HP",
+      "imageUrl1": "/imgs/hp/hp-probook-1.jpg",
+      "imageUrl2": "/imgs/hp/hp-probook-2.jpg",
+      "imageUrl3": "/imgs/hp/hp-probook-3.jpg",
+      "imageUrl4": "/imgs/hp/hp-probook-4.jpg"
+    },
+    {
+      "id": "16",
+      "name": "Lenovo Ideapad",
+      "price": 17400000,
+      "rate": 5,
+      "category": "Lenovo",
+      "imageUrl1": "/imgs/lenovo/lenovo-ideapad-1.jpg",
+      "imageUrl2": "/imgs/lenovo/lenovo-ideapad-2.jpg",
+      "imageUrl3": "/imgs/lenovo/lenovo-ideapad-3.jpg",
+      "imageUrl4": "/imgs/lenovo/lenovo-ideapad-4.jpg"
+    },
+    {
+      "id": "17",
+      "name": "Lenovo Legion 5",
+      "price": 23400000,
+      "rate": 3.5,
+      "category": "Lenovo",
+      "imageUrl1": "/imgs/lenovo/lenovo-legion5-1.jpg",
+      "imageUrl2": "/imgs/lenovo/lenovo-legion5-2.jpg",
+      "imageUrl3": "/imgs/lenovo/lenovo-legion5-3.jpg",
+      "imageUrl4": "/imgs/lenovo/lenovo-legion5-4.jpg"
+    },
+    {
+      "id": "18",
+      "name": "Lenovo Thinkbook",
+      "price": 21400000,
+      "rate": 5,
+      "category": "Lenovo",
+      "imageUrl1": "/imgs/lenovo/lenovo-thinkbook-1.jpg",
+      "imageUrl2": "/imgs/lenovo/lenovo-thinkbook-2.jpg",
+      "imageUrl3": "/imgs/lenovo/lenovo-thinkbook-3.jpg",
+      "imageUrl4": "/imgs/lenovo/lenovo-thinkbook-4.jpg"
+    },
+    {
+      "id": "19",
+      "name": "Lenovo Thinkpad",
+      "price": 22400000,
+      "rate": 4.5,
+      "category": "Lenovo",
+      "imageUrl1": "/imgs/lenovo/lenovo-thinkpad-1.jpg",
+      "imageUrl2": "/imgs/lenovo/lenovo-thinkpad-2.jpg",
+      "imageUrl3": "/imgs/lenovo/lenovo-thinkpad-3.jpg",
+      "imageUrl4": "/imgs/lenovo/lenovo-thinkpad-4.jpg"
+    }
+  ],
+  "cart": [
+    {
+      "id": 1,
+      "prodId": "1",
+      "userId": "1",
+      "quantity": 1
+    },
+    {
+      "prodId": "9",
+      "userId": "1",
+      "quantity": 1,
+      "id": 2
+    },
+    {
+      "prodId": "3",
+      "userId": "1",
+      "quantity": 1,
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Nam Can",
+      "phone": "01111111111",
+      "username": "nampro2002",
+      "password": "123",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/1200px-Google_Chrome_icon_%28February_2022%29.svg.png",
+      "address": "Thôn 5 - Thạch Hòa - Thạch Thất- Hà Nội"
+    },
+    {
+      "id": "2",
+      "name": "Khuat Sang",
+      "phone": "0432173412",
+      "username": "abc",
+      "password": "123"
+    },
+    {
+      "name": "ds",
+      "phone": "011111111112",
+      "username": "abc2",
+      "password": "123",
+      "id": "WUwFxRo"
+    }
+  ],
+  "category": [
+    {
+      "id": "1",
+      "name": "acer",
+      "description": "Acer là một tập đoàn có trụ sở tại Đài Loan, chuyên sản xuất và kinh doanh các thiết bị, phần cứng máy tính, được thành lập từ năm 1976. Tại Việt Nam, Acer được biết đến nhiều nhất với sản phẩm máy tính sách tay. Thế nhưng, ngoài Laptop, Acer còn sản xuất máy tính để bàn, máy tính bảng, server, các thiết bị lưu trữ, màn hình hiển thị, smartphone và các thiết bị ngoại vi. Đồng thời còn cung cấp các thiết bị phục vụ thương mại điện tử cho các doanh nghiệp, chính phủ và người tiêu dùng. Hiện tại, Acer là nhà sản xuất máy tính lớn thứ 3 thế giới.",
+      "webUrl": "https://www.acer.com/vn-vi"
+    },
+    {
+      "id": "2",
+      "name": "asus",
+      "description": "ASUS là công ty thuộc lĩnh vực điện tử tiêu dùng và phần cứng máy tính đa quốc gia, được thành lập vào năm 1989 và có trụ sở tại Đài Loan. Là thương hiệu gaming và bo mạch chủ hàng đầu thế giới, ASUS luôn cam kết sẽ mang đến những sản phẩm thông minh chất lượng nhất cho người dùng ở hiện tại và tương lai",
+      "webUrl": "https://www.asus.com/vn/"
+    },
+    {
+      "id": "3",
+      "name": "lenovo",
+      "description": "Lenovo là tập đoàn đa quốc gia về công nghệ máy tính, được thành lập vào năm 1984 ở Bắc Kinh với tên Legend. Hiện nay Lenovo có các trụ sở chính ở Bắc Kinh Trung Quốc và Morrisville - Bắc Carolina - Mỹ. Lenovo sản xuất nhiều sản phẩm như điện thoại, thiết bị lưu trữ điện tử,... nổi bật nhất là laptop.",
+      "webUrl": "https://www.lenovo.com/vn/vn/"
+    },
+    {
+      "id": "4",
+      "name": "dell",
+      "description": "Dell là một hãng laptop có thương hiệu, chúng được sản xuất nhiều mẫu mã với các tính năng theo nhu cầu và mục đích sử dụng của khách hàng. Và đặc biệt với Dell có có cả phù hợp với mọi nhà, tùy vào cấu hình mà chúng có sự khách nhau về giá thành, có nhiều sự lựa chọn cho người dùng.",
+      "webUrl": "https://dellonline.vn"
+    },
+    {
+      "id": "5",
+      "name": "hp",
+      "description": "HP là hãng sản xuất máy tính các loại đến từ của Mỹ , HP được thành lập ngày 1/1/1939 tại bang California, Palo Alto. Đến năm 2006, tổng doanh thu của HP đạt 9.4 tỉ đô la, vượt qua đối thủ IBM với 9.1 tỉ, vươn lên vị trí số 1 trong các lĩnh vực công nghệ thông tin của công ty.",
+      "webUrl": "https://www.hp.com/vn-vi/home.html"
+    }
+  ],
+  "checkedout": [
+    {
+      "id": "1",
+      "userId": "1",
+      "description": [
+        {
+          "prodId": "3",
+          "quantity": 1,
+          "id": 1
+        },
+        {
+          "prodId": "4",
+          "quantity": 3,
+          "id": 2
+        }
+      ],
+      "name": "Nam Can",
+      "phone": "01111111111",
+      "address": "Thôn 5 - Thạch Hòa - Thạch Thất- Hà Nội"
+    },
+    {
+      "userId": "1",
+      "description": [
+        {
+          "prodId": "3",
+          "quantity": 1,
+          "descId": "1"
+        },
+        {
+          "prodId": "4",
+          "quantity": 1,
+          "descId": "2"
+        },
+        {
+          "prodId": "1",
+          "quantity": 1,
+          "descId": "3"
+        },
+        {
+          "prodId": "5",
+          "quantity": 1,
+          "descId": "4"
+        },
+        {
+          "prodId": "6",
+          "quantity": 2,
+          "descId": "5"
+        },
+        {
+          "prodId": "7",
+          "quantity": 1,
+          "descId": "6"
+        }
+      ],
+      "name": "Nam Can",
+      "phone": "01111111111",
+      "address": "Thôn 5 - Thạch Hòa - Thạch Thất- Hà Nội",
+      "id": "MBCodZd"
+    }
+  ]
+}

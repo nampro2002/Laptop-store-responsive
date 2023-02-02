@@ -1,0 +1,12 @@
+@media only screen and (max-width: 610px) {
+    .cate-car-img{
+      width: 250px;
+    }
+  }
+  
+@media only screen and (min-width: 610px) {
+    .cate-car-img{
+      width: 450px;
+    }
+  }
+  
