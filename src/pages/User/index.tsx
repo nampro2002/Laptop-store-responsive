@@ -8,15 +8,15 @@ import {
   getAllProduct,
   getTypicalProduct,
 } from "../../redux/productSlice";
-import { getAllUser } from "../../redux/userSlice";
+import { getAllUser, GetUserInfo } from "../../redux/userSlice";
 export function User() {
+  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
   const dispatch = useAppDispatch();
   useEffect(() => {
-    // console.log("dispatch");
+    dispatch(GetUserInfo(userInfo));
     dispatch(getTypicalProduct());
     dispatch(getAllProduct());
     dispatch(getAllCategory());
-    const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
     if (userInfo.id) {
       dispatch(getAllCart(userInfo.id));
     }

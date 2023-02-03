@@ -6,15 +6,15 @@ import Navbar from "../../components/Navbar";
 import { getAllCart } from "../../redux/cartSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { getAllCategory, getAllProduct, getTypicalProduct } from "../../redux/productSlice";
-import { getAllUser } from "../../redux/userSlice";
+import { getAllUser, GetUserInfo } from "../../redux/userSlice";
 function All() {
+  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
   const dispatch = useAppDispatch();
   useEffect(() => {
-    // console.log("dispatch");
     dispatch(getTypicalProduct());
+    dispatch(GetUserInfo(userInfo));
     dispatch(getAllProduct());
     dispatch(getAllCategory());
-    const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
     if (userInfo.id) {
       dispatch(getAllCart(userInfo.id));
     }

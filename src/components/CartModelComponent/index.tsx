@@ -1,6 +1,7 @@
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 import {
   decreaseQuantity,
   increaseQuantity,
@@ -9,6 +10,7 @@ import {
 import { useAppDispatch } from "../../redux/hooks";
 import { ICartProduct } from "../../types/types";
 import { formatPrice } from "../../Util/formatPrice";
+import { Toast } from "../../Util/toastify";
 import "./style.css";
 interface CartModelComponentProps {
   cartProduct: ICartProduct;
@@ -29,7 +31,11 @@ function CartModelComponent({ cartProduct }: CartModelComponentProps) {
           userId,
           quantity: cartProduct.quantity + 1,
         })
-      );
+      )
+        .unwrap()
+        .catch((error) => {
+          Toast.error("Lỗi");
+        });
     } else if (value === "down") {
       if (quantity === 1) {
         return;
@@ -41,14 +47,22 @@ function CartModelComponent({ cartProduct }: CartModelComponentProps) {
           userId,
           quantity: cartProduct.quantity - 1,
         })
-      );
+      )
+        .unwrap()
+        .catch((error) => {
+          Toast.error("Lỗi");
+        });
       setQuantity((quantity) => quantity - 1);
     } else {
       return;
     }
   };
   const handleRemoveFromCart = (id: string) => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(id))
+      .unwrap()
+      .catch((error) => {
+        Toast.error("Lỗi");
+      });
   };
   const total = cartProduct.price * cartProduct.quantity;
   return (
@@ -65,6 +79,18 @@ function CartModelComponent({ cartProduct }: CartModelComponentProps) {
         },
       }}
     >
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
       <Box
         display="flex"
         sx={{

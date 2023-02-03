@@ -17,14 +17,14 @@ const initialState: initState = {
 export const getTypicalProduct = createAsyncThunk(
   "products/getTypicalProduct",
   async () => {
-    const res = await axios.get("https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/products?_limit=8");
+    const res = await axios.get("https://6266262cdbee37aff9acca36.mockapi.io/products?_limit=8");
     return res.data;
   }
 );
 export const getAllProduct = createAsyncThunk(
   "products/getAllProduct",
   async () => {
-    const res = await axios.get("https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/products");
+    const res = await axios.get("https://6266262cdbee37aff9acca36.mockapi.io/products");
     return res.data;
   }
 );
@@ -39,7 +39,7 @@ export const updateProductRating = createAsyncThunk(
   "products/updateProductRating",
   async ({ productId, rate }: { productId: string; rate: number }) => {
     const res = await axios.patch(
-      `https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/products/${productId}`,
+      `https://6266262cdbee37aff9acca36.mockapi.io/products/${productId}`,
       {
         rate,
       }
@@ -51,7 +51,7 @@ export const random = createAsyncThunk(
   "products/random",
   async ({ productId, price }: { productId: string; price: number }) => {
     const res = await axios.patch(
-      `https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/products/${productId}`,
+      `https://6266262cdbee37aff9acca36.mockapi.io/products/${productId}`,
       {
         price,
       }

@@ -8,6 +8,8 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { CheckCart } from "../../redux/cartSlice";
 import { formatPrice } from "../../Util/formatPrice";
+import { Toast } from "../../Util/toastify";
+import { ToastContainer } from "react-toastify";
 
 interface ProductComponentProps {
   product: IProduct;
@@ -15,8 +17,8 @@ interface ProductComponentProps {
 
 function ProductComponent({ product }: ProductComponentProps) {
   const dispatch = useAppDispatch();
-  const userInfo = JSON.parse(localStorage.getItem("user") || '{}')
-  const userId = userInfo.id
+  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
+  const userId = userInfo.id;
   const navigate = useNavigate();
   const handleToProductDetail = (productId: string) => {
     return navigate({
@@ -28,15 +30,32 @@ function ProductComponent({ product }: ProductComponentProps) {
   };
   const handleAddToCart = (productId: string, quantity: number) => {
     if (!userInfo.id) {
-      return navigate('/login')
-  }
-  else {
-    dispatch(CheckCart({ productId, quantity, userId }));
-  }
-    
+      return navigate("/login");
+    } else {
+      dispatch(CheckCart({ productId, quantity, userId }))
+        .unwrap()
+        .then(() => {
+          Toast.notify(`đã thêm vào giỏ hàng 1 ${product.name}`);
+        })
+        .catch((error) => {
+          Toast.error("Lỗi");
+        });
+    }
   };
   return (
     <Box width="90%" marginBottom="10%" boxShadow="">
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
       <Box
         sx={{
           padding: "2px",

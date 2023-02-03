@@ -10,7 +10,6 @@ export default function SimpleSlider() {
   const productList = useAppSelector(
     (state: RootState) => state.products.productCarousel
   );
-  // console.log(list);
   // let productListFormat:IProductFormat[] = [];
   // productList.map((prod, index) => {
   //   let priceFormat = formatPrice(prod.price);

@@ -1,6 +1,7 @@
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 import {
   decreaseQuantity,
   increaseQuantity,
@@ -9,6 +10,7 @@ import {
 import { useAppDispatch } from "../../redux/hooks";
 import { ICartProduct } from "../../types/types";
 import { formatPrice } from "../../Util/formatPrice";
+import { Toast } from "../../Util/toastify";
 import CartComponentAcordion from "../CartComponentAcordion";
 import "./style.css";
 
@@ -17,9 +19,9 @@ interface CartComponentProps {
 }
 
 function CartComponent({ cartProduct }: CartComponentProps) {
+  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
   const dispatch = useAppDispatch();
   const [quantity, setQuantity] = useState(cartProduct.quantity);
-  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
   const userId = userInfo.id;
   const handleSetQuantity = (value: string) => {
     if (value === "up") {
@@ -31,7 +33,11 @@ function CartComponent({ cartProduct }: CartComponentProps) {
           userId,
           quantity: cartProduct.quantity + 1,
         })
-      );
+      )
+        .unwrap()
+        .catch(() => {
+          Toast.error("Lỗi");
+        });
     } else if (value === "down") {
       if (quantity === 1) {
         return;
@@ -43,7 +49,11 @@ function CartComponent({ cartProduct }: CartComponentProps) {
           userId,
           quantity: cartProduct.quantity - 1,
         })
-      );
+      )
+        .unwrap()
+        .catch(() => {
+          Toast.error("Lỗi");
+        });
       setQuantity((quantity) => quantity - 1);
     } else {
       return;
@@ -51,7 +61,11 @@ function CartComponent({ cartProduct }: CartComponentProps) {
   };
   const total = cartProduct.price * cartProduct.quantity;
   const handleRemoveFromCart = (id: string) => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(id))
+      .unwrap()
+      .catch((error) => {
+        Toast.error("Lỗi");
+      });
   };
   return (
     <Box
@@ -67,6 +81,18 @@ function CartComponent({ cartProduct }: CartComponentProps) {
         },
       }}
     >
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
       <Stack direction="row">
         <img
           src={cartProduct.imgUrl}
@@ -80,13 +106,13 @@ function CartComponent({ cartProduct }: CartComponentProps) {
           // ml="30px"
           display="flex"
           sx={{
-            flexDirection:{
+            flexDirection: {
               xl: "row",
               lg: "row",
               md: "row",
               sm: "row",
               xs: "column",
-            }
+            },
           }}
           width="calc(100% - 100px)"
           alignItems="center"

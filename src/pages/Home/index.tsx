@@ -4,19 +4,22 @@ import BodyVideo from "../../components/BodyVideo";
 import CategoryCarousel from "../../components/CategoryCarousel";
 import HeaderCarousel from "../../components/HeaderCarousel";
 import ProductCarousel from "../../components/ProductCarousel";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useEffect } from "react";
 import { getAllCategory, getAllProduct, getTypicalProduct } from "../../redux/productSlice";
 import { getAllCart } from "../../redux/cartSlice";
-import { getAllUser } from "../../redux/userSlice";
+import { getAllUser, GetUserInfo } from "../../redux/userSlice";
+import { RootState } from "../../redux/store";
+// console.log(userInfo);
 function Home() {
+  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
+  const userState = useAppSelector((state:RootState)=>state.user.user)
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log("dispatch");
+    dispatch(GetUserInfo(userInfo));
     dispatch(getTypicalProduct());
     dispatch(getAllProduct());
     dispatch(getAllCategory());
-    const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
     if (userInfo.id) {
       dispatch(getAllCart(userInfo.id));
     }

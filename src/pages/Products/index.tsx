@@ -19,9 +19,10 @@ import {
   random,
 } from "../../redux/productSlice";
 import { RootState } from "../../redux/store";
-import { getAllUser } from "../../redux/userSlice";
+import { getAllUser, GetUserInfo } from "../../redux/userSlice";
 import CloseIcon from "@mui/icons-material/Close";
 function Products() {
+  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
   const [filters, setFilters] = useState({
     cateFilter: "",
     sortFilter: 0,
@@ -42,15 +43,13 @@ function Products() {
   }
   if (filters.sortFilter !== 0 && filters.cateFilter === "") {
     switch (filters.sortFilter) {
-      case 10:
-        console.log("vao day");
+      case 10:        
         listOut = productList.slice().sort((prod1, prod2) => {
           return prod1.price - prod2.price;
         });
         break;
 
-      case 20:
-        console.log("sort 20");
+      case 20:        
         listOut = productList.slice().sort((prod1, prod2) => {
           return prod2.price - prod1.price;
         });
@@ -99,10 +98,9 @@ function Products() {
 
   // dispatch(random())
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    console.log("dispatch");
+  useEffect(() => {    
+    dispatch(GetUserInfo(userInfo));
     dispatch(getAllProduct());
-    const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
     if (userInfo.id) {
       dispatch(getAllCart(userInfo.id));
     }

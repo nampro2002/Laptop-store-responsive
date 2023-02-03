@@ -11,20 +11,20 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import * as Yup from "yup";
 import ConfirmCartAcordion from "../../components/ConfirmCartAcordion";
-import ConfirmInfo from "../../components/ConfirmInfo";
+import { removeAllFromCart } from "../../redux/cartSlice";
+import { addCheckedOut } from "../../redux/checkedoutSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { RootState } from "../../redux/store";
+import { saveAddress } from "../../redux/userSlice";
 import { formatPrice } from "../../Util/formatPrice";
-import * as Yup from "yup";
 import { Toast } from "../../Util/toastify";
-import { useState } from "react";
-import { removeAllFromCart } from "../../redux/cartSlice";
-import { saveAddress, updateInfo } from "../../redux/userSlice";
-import { addCheckedOut } from "../../redux/checkedoutSlice";
 function ConfirmCart() {
+  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
   const cartList = useAppSelector((state: RootState) => state.cart.cartList);
   const [checked, setChecked] = useState(false);
   const dispatch = useAppDispatch();
@@ -62,12 +62,10 @@ function ConfirmCart() {
       descId: `${index + 1}`,
     };
   });
-  console.log("description", description);
 
   const handleChecked = () => {
     setChecked(!checked);
   };
-  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
   const formik = useFormik({
     initialValues: {
       name: userInfo.name as string,
@@ -77,7 +75,12 @@ function ConfirmCart() {
     },
     validationSchema: Yup.object({
       name: Yup.string().required("bạn chưa nhập tên"),
-      phone: Yup.string().required("bạn chưa nhập số điện thoại"),
+      phone: Yup.string()
+        .required("bạn chưa nhập số điện thoại")
+        .matches(
+          /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/,
+          "số điện thoại không hợp lệ"
+        ),
       address: Yup.string().required("bạn chưa nhập địa chỉ"),
       payments: Yup.string().required("bạn chưa chọn phương thức thanh toán"),
     }),
@@ -99,18 +102,24 @@ function ConfirmCart() {
             phone: values.phone,
             address: values.address,
           })
-        );
-        dispatch(removeAllFromCart(cartList));
-        Toast.notify("đặt hàng thành công");
-        if (values.payments === "online") {
-          setTimeout(() => {
-            return navigate("/finalcheckout");
-          }, 2000);
-        } else {
-          setTimeout(() => {
-            return navigate("/");
-          }, 2000);
-        }
+        )
+          .unwrap()
+          .then(() => {
+            dispatch(removeAllFromCart(cartList));
+            Toast.notify("đặt hàng thành công");
+          })
+          .catch((error) => {
+            Toast.error("Lỗi");
+          });
+        // if (values.payments === "online") {
+        //   setTimeout(() => {
+        //     return navigate("/finalcheckout");
+        //   }, 2000);
+        // } else {
+        //   setTimeout(() => {
+        //     return navigate("/");
+        //   }, 2000);
+        // }
       }
     },
   });

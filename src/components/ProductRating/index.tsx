@@ -5,9 +5,11 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
+import { ToastContainer } from "react-toastify";
 import { useAppDispatch } from "../../redux/hooks";
 import { updateProductRating } from "../../redux/productSlice";
 import { IProduct } from "../../types/types";
+import { Toast } from "../../Util/toastify";
 
 interface ProductRatingProps {
   product: IProduct | undefined;
@@ -27,12 +29,31 @@ function ProductRating({ product }: ProductRatingProps) {
   const handleRating = () => {
     if (rating && defaultRate && productId) {
       finalRate = (defaultRate + rating) / 2;
-      dispatch(updateProductRating({ productId, rate: finalRate }));
+      dispatch(updateProductRating({ productId, rate: finalRate }))
+        .unwrap()
+        .then(() => {
+          Toast.notify(`Đánh giá thành công sản phẩm ${product.name}`);
+        })
+        .catch((error) => {
+          Toast.error("Lỗi");
+        });
     }
     setComment("");
   };
   return (
     <Box mt="20px">
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
       <Box
         width="80%"
         margin="0 auto"

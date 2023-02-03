@@ -11,9 +11,7 @@ function CategoryComponent({ category }: CategoryComponentProps) {
   const imgUrl = `imgs/logo/${category}.jpg`;
   // const [inputSearch, setInputSearch] = useState<string>("");
   const navigate = useNavigate();
-  const handleSubmitSearch = (e: any, searchParams: string) => {
-    // console.log("e.clientX", e.clientX);
-    // console.log("clientXonMouseDown", clientXonMouseDown);
+  const handleSubmitSearch = (e: any, searchParams: string) => {   
 
     // if (inputSearch === "") {
     //   return;

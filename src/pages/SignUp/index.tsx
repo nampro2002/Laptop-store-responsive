@@ -30,10 +30,19 @@ function SignUp() {
       confirmPassword: Yup.string()
         .required("bạn chưa nhập lại password")
         .oneOf([Yup.ref("password"), null], "phải trùng với password"),
-      phone: Yup.string().required("bạn chưa nhập số điện thoại")
-      .test("duplicate-phonenumber", "số điện thoại này đã tồn tại rồi", (value) => {
-        return !userList.some((user) => user.phone === value);
-      }),
+      phone: Yup.string()
+        .required("bạn chưa nhập số điện thoại")
+        .matches(
+          /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/,
+          "số điện thoại không hợp lệ"
+        )
+        .test(
+          "duplicate-phonenumber",
+          "số điện thoại này đã tồn tại rồi",
+          (value) => {
+            return !userList.some((user) => user.phone === value);
+          }
+        ),
     }),
     onSubmit: () => {
       const newUser = {
@@ -42,17 +51,23 @@ function SignUp() {
         username: formik.values.username,
         password: formik.values.password,
       };
-      dispatch(register(newUser));
-      Toast.notify("đăng ký thành công");
-      setTimeout(() => {
-        return navigate("/login");
-      }, 1500);
+      dispatch(register(newUser))
+        .unwrap()
+        .then(() => {
+          Toast.notify("đăng ký thành công");
+          setTimeout(() => {
+            return navigate("/login");
+          }, 1500);
+        })
+        .catch((error) => {
+          Toast.error("Lỗi");
+        });
     },
   });
 
   return (
     <Box>
-       <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={1000}
         hideProgressBar={false}
@@ -263,7 +278,7 @@ function SignUp() {
                     }}
                   >
                     LOGIN
-                  </Button>                  
+                  </Button>
                 </Stack>
               </Box>
             </Stack>

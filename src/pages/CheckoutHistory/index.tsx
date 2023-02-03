@@ -26,6 +26,7 @@ import { getAllCheckedOut } from "../../redux/checkedoutSlice";
 import { RootState } from "../../redux/store";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./style.css"
+import { GetUserInfo } from "../../redux/userSlice";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -112,6 +113,7 @@ export default function CustomPaginationActionsTable() {
   const userId = userInfo.id;
   const dispatch = useAppDispatch();
   React.useEffect(() => {
+    dispatch(GetUserInfo(userInfo));
     dispatch(getAllCheckedOut(userId));
   }, [dispatch]);
   const rows = useAppSelector(
@@ -120,12 +122,9 @@ export default function CustomPaginationActionsTable() {
   const productList = useAppSelector(
     (state: RootState) => state.products.productList
   );
-  let productCheckedList = rows.map((row) => {
-    console.log("row", row);
-    const descNew = row.description.map((desc) => {
-      console.log(desc);
-      const product = productList.find((prod: any) => prod.id === desc.prodId);
-      console.log("prod", product);
+  let productCheckedList = rows.map((row) => {    
+    const descNew = row.description.map((desc) => {      
+      const product = productList.find((prod: any) => prod.id === desc.prodId);      
       if (product) {
         return {
           prodId: desc.prodId,
@@ -141,15 +140,13 @@ export default function CustomPaginationActionsTable() {
           price: 0,
         };
       }
-    });
-    console.log("row.description", descNew);
+    });    
     return {
       ...row,
       description: descNew,
     };
   });
-
-  console.log(productCheckedList);
+  
 
   const theme = createTheme({
     components: {

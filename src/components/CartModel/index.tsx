@@ -2,10 +2,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { removeAllFromCart } from "../../redux/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { RootState } from "../../redux/store";
 import { formatPrice } from "../../Util/formatPrice";
+import { Toast } from "../../Util/toastify";
 import CartModelComponent from "../CartModelComponent";
 import "./style.css";
 interface CartModelProps {
@@ -54,7 +56,11 @@ function CartModel({ handleClose, handleChange, setSideBar }: CartModelProps) {
     handleClose();
   };
   const handleRemoveAll = () => {
-    dispatch(removeAllFromCart(cartList));
+    dispatch(removeAllFromCart(cartList))
+      .unwrap()
+      .catch((error) => {
+        Toast.error("Lỗi");
+      });
   };
   const navigate = useNavigate();
   const handleMoveTo = (path: string) => {
@@ -72,6 +78,18 @@ function CartModel({ handleClose, handleChange, setSideBar }: CartModelProps) {
         },
       }}
     >
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
       <Stack
         direction="row"
         alignItems="center"
@@ -287,7 +305,6 @@ function CartModel({ handleClose, handleChange, setSideBar }: CartModelProps) {
                   bgcolor: "#fff",
                 },
               }}
-              
             >
               VỀ TRANG CHỦ
             </Button>

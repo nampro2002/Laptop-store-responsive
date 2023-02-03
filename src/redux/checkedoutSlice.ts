@@ -14,7 +14,7 @@ export const getAllCheckedOut = createAsyncThunk(
   "checkedout/getAllCheckedOut",
   async (userId: string) => {
     const res = await axios.get(
-      `https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/checkedout?userId=${userId}`
+      `https://6266262cdbee37aff9acca36.mockapi.io/checkedout?userId=${userId}`
     );
     return res.data;
   }
@@ -23,7 +23,7 @@ export const addCheckedOut = createAsyncThunk(
   "checkedout/addCheckedOut",
   async (newCheckedOut: ICheckedout) => {
     const res = await axios.post(
-      `https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/checkedout`,
+      `https://6266262cdbee37aff9acca36.mockapi.io/checkedout`,
       newCheckedOut
     );
     return res.data;

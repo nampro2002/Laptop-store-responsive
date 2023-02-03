@@ -41,15 +41,13 @@ function SearchPage() {
   let listOut = searchOut;
   if (filters.sortFilter !== 0) {
     switch (filters.sortFilter) {
-      case 10:
-        console.log("vao day");
+      case 10:       
         listOut = searchOut.slice().sort((prod1, prod2) => {
           return prod1.price - prod2.price;
         });
         break;
 
-      case 20:
-        console.log("sort 20");
+      case 20:       
         listOut = searchOut.slice().sort((prod1, prod2) => {
           return prod2.price - prod1.price;
         });

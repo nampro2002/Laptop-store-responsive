@@ -1,10 +1,12 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import CartComponent from "../../components/CartComponent";
 import { removeAllFromCart } from "../../redux/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { RootState } from "../../redux/store";
 import { formatPrice } from "../../Util/formatPrice";
+import { Toast } from "../../Util/toastify";
 // import "./style.css";
 
 function Cart() {
@@ -46,7 +48,14 @@ function Cart() {
   );
 
   const handleRemoveAll = () => {
-    dispatch(removeAllFromCart(cartList));
+    dispatch(removeAllFromCart(cartList))
+      .unwrap()
+      .then(() => {
+        Toast.notify(`Cập nhật giỏ hàng thành công`);
+      })
+      .catch((error) => {
+        Toast.error("Lỗi");
+      });
   };
 
   const handleMoveTo = (path: string) => {
@@ -54,6 +63,18 @@ function Cart() {
   };
   return (
     <Box mb="200px">
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
       <Typography
         variant="h2"
         fontWeight="900"
@@ -91,21 +112,25 @@ function Cart() {
               },
             }}
           >
-            <Typography variant="h5" fontWeight="600" fontSize="25px" mb="20px"
-            sx={{
-              fontSize: {
-                xl: "25px",
-                lg: "25px",
-                md: "22px",
-                sm: "20px",
-                xs: "16px",
-              },
-            }}
+            <Typography
+              variant="h5"
+              fontWeight="600"
+              fontSize="25px"
+              mb="20px"
+              sx={{
+                fontSize: {
+                  xl: "25px",
+                  lg: "25px",
+                  md: "22px",
+                  sm: "20px",
+                  xs: "16px",
+                },
+              }}
             >
               BẠN CÓ {cartLength} SẢN PHẨM TRONG GIỎ HÀNG
             </Typography>
             {cartPorductList.map((component, index) => (
-              <CartComponent cartProduct={component} />
+              <CartComponent cartProduct={component} key={index}/>
             ))}
           </Stack>
           <Box

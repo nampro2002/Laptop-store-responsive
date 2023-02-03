@@ -18,9 +18,7 @@ const initialState: initState = {
 export const getAllCart = createAsyncThunk(
   "cartList/getAllCart",
   async (userId: string) => {
-    const res = await axios.get(`https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/cart?userId=${userId}`);
-    // console.log("cart", res.data);
-    // console.log("get");
+    const res = await axios.get(`https://63dca59e2308e3e319eb1d2e.mockapi.io/cart?userId=${userId}`);        
     return res.data;
   }
 );
@@ -34,7 +32,7 @@ export const CheckCart = createAsyncThunk(
     }: { productId: string; quantity: number; userId: string },
     thunkAPI
   ) => {
-    const res = await axios.get("https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/cart");
+    const res = await axios.get("https://63dca59e2308e3e319eb1d2e.mockapi.io/cart");
     const cartList = res.data;
     const productCart: Omit<ICart, "id"> = {
       prodId: productId,
@@ -57,19 +55,16 @@ export const CheckCart = createAsyncThunk(
     });
     if (!isAdded) {
       thunkAPI.dispatch(addToCart(productCart));
-    }
-    console.log("check");
-    console.log("isAdded", isAdded);
+    }        
   }
 );
 export const updateToCart = createAsyncThunk(
   "cartList/updateToCart",
   async (productCart: ICart) => {
     const res = await axios.put<ICart>(
-      `https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/cart/${productCart.id}`,
+      `https://63dca59e2308e3e319eb1d2e.mockapi.io/cart/${productCart.id}`,
       productCart
-    );
-    console.log("update");
+    );    
     return res.data;
   }
 );
@@ -77,7 +72,7 @@ export const decreaseQuantity = createAsyncThunk(
   "cartList/decreaseQuantity",
   async (productCart: ICart) => {
     const res = await axios.put<ICart>(
-      `https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/cart/${productCart.id}`,
+      `https://63dca59e2308e3e319eb1d2e.mockapi.io/cart/${productCart.id}`,
       productCart
     );
     return res.data;
@@ -87,7 +82,7 @@ export const increaseQuantity = createAsyncThunk(
   "cartList/increaseQuantity",
   async (productCart: ICart) => {
     const res = await axios.put<ICart>(
-      `https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/cart/${productCart.id}`,
+      `https://63dca59e2308e3e319eb1d2e.mockapi.io/cart/${productCart.id}`,
       productCart
     );
     return res.data;
@@ -95,10 +90,9 @@ export const increaseQuantity = createAsyncThunk(
 );
 export const addToCart = createAsyncThunk(
   "cartList/addToCart",
-  async (productCart: Omit<ICart, "id">) => {
-    console.log("add");
+  async (productCart: Omit<ICart, "id">) => {    
     const res = await axios.post<ICart>(
-      "https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/cart",
+      "https://63dca59e2308e3e319eb1d2e.mockapi.io/cart",
       productCart
     );
     return res.data;
@@ -107,15 +101,14 @@ export const addToCart = createAsyncThunk(
 export const removeFromCart = createAsyncThunk(
   "cartList/removeFromCart",
   async (productCartId: string) => {
-    await axios.delete(`https://laptop-store-fakeapi-q49htehpo-nampro2002.vercel.app/cart/${productCartId}`);
-    // console.log("remove");
+    await axios.delete(`https://63dca59e2308e3e319eb1d2e.mockapi.io/cart/${productCartId}`);    
     return productCartId;
   }
 );
 export const removeAllFromCart = createAsyncThunk(
   "cartList/removeAllFromCart",
   async (cartList: ICart[], thunkAPI) => {
-    cartList.forEach((cart) => {
+    cartList.forEach((cart) => {       
       thunkAPI.dispatch(removeFromCart(cart.id));
     });
   }
@@ -131,19 +124,15 @@ const cartSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getAllCart.fulfilled, (state, action) => {
-        // console.log("get-fullfilled");
+      .addCase(getAllCart.fulfilled, (state, action) => {        
         state.cartList = action.payload;
       })
-      .addCase(CheckCart.fulfilled, () => {
-        // console.log("check-fullfilled");
+      .addCase(CheckCart.fulfilled, () => {        
       })
-      .addCase(addToCart.fulfilled, (state, action) => {
-        // console.log("add-fullfilled");
+      .addCase(addToCart.fulfilled, (state, action) => {        
         state.cartList.push(action.payload);
       })
-      .addCase(updateToCart.fulfilled, (state, action) => {
-        // console.log("up-fullfilled");
+      .addCase(updateToCart.fulfilled, (state, action) => {        
         state.cartList.some((product) => {
           if (product.prodId === action.payload.prodId) {
             product.quantity += 1;
@@ -152,8 +141,7 @@ const cartSlice = createSlice({
           return false;
         });
       })
-      .addCase(decreaseQuantity.fulfilled, (state, action) => {
-        // console.log("decrease-fullfilled");
+      .addCase(decreaseQuantity.fulfilled, (state, action) => {        
         state.cartList.some((product) => {
           if (product.prodId === action.payload.prodId) {
             product.quantity -= 1;
@@ -162,8 +150,7 @@ const cartSlice = createSlice({
           return false;
         });
       })
-      .addCase(increaseQuantity.fulfilled, (state, action) => {
-        // console.log("increase-fullfilled");
+      .addCase(increaseQuantity.fulfilled, (state, action) => {        
         state.cartList.some((product) => {
           if (product.prodId === action.payload.prodId) {
             product.quantity += 1;
@@ -173,14 +160,11 @@ const cartSlice = createSlice({
         });
       })
       .addCase(removeFromCart.fulfilled, (state, action) => {
-        // console.log("remv-fullfilled");
         state.cartList = state.cartList.filter(
           (prod) => prod.id !== action.payload
-        );
-        console.log("cartList", state.cartList);
+          );                    
       })
-      .addCase(removeAllFromCart.fulfilled, (state, action) => {
-        // console.log("remv-fullfilled");
+      .addCase(removeAllFromCart.fulfilled, (state, action) => {        
         state.cartList = [];
       });
   },

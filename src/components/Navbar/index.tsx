@@ -1,44 +1,37 @@
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import {
-  AppBar,
-  Box,
-  Button,
-  Drawer,
-  IconButton,
-  Modal,
-  Stack,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import TextField from "@mui/material/TextField";
-import { useState } from "react";
-import {
-  createSearchParams,
-  Link,
-  NavLink,
-  useNavigate,
-} from "react-router-dom";
-import CartModel from "../CartModel";
-import PersonIcon from "@mui/icons-material/Person";
-import { Logout } from "../../redux/userSlice";
-import { useAppDispatch } from "../../redux/hooks";
-import { useDispatch } from "react-redux";
-import { logOutRemoveCart } from "../../redux/cartSlice";
-import { Avatar } from "@mui/joy";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import LaptopOutlinedIcon from "@mui/icons-material/LaptopOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { Avatar } from "@mui/joy";
+import {
+  AppBar,
+  Box,
+  Button,
+  Drawer, Modal,
+  Stack, Typography
+} from "@mui/material";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
+import {
+  createSearchParams, NavLink,
+  useNavigate
+} from "react-router-dom";
+import { logOutRemoveCart } from "../../redux/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { RootState } from "../../redux/store";
+import { Logout } from "../../redux/userSlice";
+import CartModel from "../CartModel";
+// const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
 function Navbar() {
   const [navHighLight, setNavHighLight] = useState("");
   const [inputSearch, setInputSearch] = useState<string>("");
   const [sideBar, setSideBar] = useState(false);
-  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
-  // console.log("navHighLight", navHighLight);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const userInfo  = useAppSelector((state:RootState)=>state.user.user)
   const handleSubmitSearch = () => {
     if (inputSearch === "") {
       return;
@@ -560,13 +553,6 @@ function Navbar() {
               lg: "none",
               md: "block",
               sm: "block",
-              xs: "block",
-            },
-            marginTop: {
-              xl: "0",
-              lg: "0",
-              md: "0",
-              sm: "20px",
               xs: "block",
             },
           }}

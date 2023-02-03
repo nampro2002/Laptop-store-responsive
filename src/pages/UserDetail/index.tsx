@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
   getAllUser,
+  GetUserInfo,
   updateAvatar,
   updateInfo,
   updatePassword,
@@ -17,9 +18,9 @@ import { getAllProduct } from "../../redux/productSlice";
 import { getAllCart } from "../../redux/cartSlice";
 import { Toast } from "../../Util/toastify";
 import { ToastContainer } from "react-toastify";
+
 function UserDetail() {
   const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
-
   const userList = useAppSelector((state: RootState) => state.user.users);
   const [avatarUrl, setAvatarUrl] = useState(userInfo.imgUrl);
   const dispatch = useAppDispatch();
@@ -59,15 +60,20 @@ function UserDetail() {
     dispatch(
       updateAvatar({
         id: userInfo.id,
+        phone: userInfo.phone,
+        name: userInfo.name,
+        username: userInfo.username,
+        password: userInfo.password,
+        address: userInfo.address,
         imgUrl: avatarUrl,
       })
     );
     if (userInfo.imgUrl !== avatarUrl) {
       Toast.notify("cập nhật avatar thành công");
     }
-    setTimeout(() => {
-      window.location.reload();
-    }, 1500);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1500);
   };
 
   const formInfo = useFormik({
@@ -80,11 +86,19 @@ function UserDetail() {
       name: Yup.string().required("bạn chưa nhập tên"),
       phone: Yup.string()
         .required("bạn chưa nhập số điện thoại")
+        .matches(
+          /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/,
+          "số điện thoại không hợp lệ"
+        )
         .test(
           "duplicate-phonenumber",
           "số điện thoại này đã tồn tại rồi",
           (value) => {
-            return !userList.some((user) => user.phone === value);
+            let errorLog = true;
+            if (userInfo.phone !== value) {
+              errorLog = !userList.some((user) => user.phone === value);
+            }
+            return errorLog;
           }
         ),
       address: Yup.string().required("bạn chưa nhập địa chỉ"),
@@ -95,41 +109,48 @@ function UserDetail() {
         phone: formInfo.values.phone,
         address: formInfo.values.address,
       };
-      handleUpdateInfo(updatedInfo);
       if (
         userInfo.name !== updatedInfo.name ||
         userInfo.phone !== updatedInfo.phone ||
         userInfo.address !== updatedInfo.address
       ) {
-        Toast.notify("cập nhật thông tin thành công");
+        dispatch(
+          updateInfo({
+            id: userInfo.id,
+            name: updatedInfo.name,
+            phone: updatedInfo.phone,
+            address: updatedInfo.address,
+          })
+        )
+          .unwrap()
+          .then(() => {
+            Toast.notify("cập nhật thông tin thành công");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
+          })
+          .catch((error) => {
+            Toast.error("Lỗi");
+          });
       }
     },
   });
-  const handleUpdateInfo = (updatedInfo: {
-    name: string;
-    phone: string;
-    address: string;
-  }) => {
-    dispatch(
-      updateInfo({
-        id: userInfo.id,
-        name: updatedInfo.name,
-        phone: updatedInfo.phone,
-        address: updatedInfo.address,
-      })
-    );
-  };
+  // const handleUpdateInfo = (updatedInfo: {
+  //   name: string;
+  //   phone: string;
+  //   address: string;
+  // }) => {
+
+  // };
 
   useEffect(() => {
-    console.log("dispatch");
     dispatch(getAllProduct());
-    const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
     if (userInfo.id) {
+      dispatch(GetUserInfo(userInfo));
       dispatch(getAllCart(userInfo.id));
     }
     dispatch(getAllUser());
   }, [dispatch]);
-  console.log(formPassword.errors);
 
   return (
     <Box>
@@ -196,23 +217,24 @@ function UserDetail() {
                 },
               }}
             >
-              <Box  border="1px solid #000"
-              sx={{
-                width: {
-                  xl: "500px",
-                  lg: "500px",  
-                  md: "300px",
-                  sm: "column",
-                  xs: "column",              
-                },
-                height: {
-                  xl: "500px",
-                  lg: "500px", 
-                  md: "row",
-                  sm: "column",
-                  xs: "column",               
-                },
-              }}
+              <Box
+                border="1px solid #000"
+                sx={{
+                  width: {
+                    xl: "500px",
+                    lg: "500px",
+                    md: "300px",
+                    sm: "column",
+                    xs: "column",
+                  },
+                  height: {
+                    xl: "500px",
+                    lg: "500px",
+                    md: "row",
+                    sm: "column",
+                    xs: "column",
+                  },
+                }}
               >
                 <img src={avatarUrl} alt="" width="100%" height="100%" />
               </Box>
@@ -228,55 +250,59 @@ function UserDetail() {
                 </Typography>
               </Box> */}
             </Box>
-            <Stack  direction="column" spacing="20px" sx={{
-               width: {
-                md: "100%",
-              },
-               marginLeft: {
-                md: "20px",
-              },
-            }}>
             <Stack
               direction="column"
-              justifyContent="space-between"
-              alignItems="flex-start"
-            >
-              <Typography variant="h6" fontWeight="400" fontSize="19px">
-                AVATAR URL
-              </Typography>
-              <TextField
-                placeholder="avatar image url"
-                fullWidth
-                sx={{
-                  "& fieldset": { borderRadius: "0" },
-                  "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    border: "1px solid #000",
-                    borderRadius: "0",
-                  },
-                }}
-                name="imgurl"
-                value={avatarUrl}
-                onChange={(e) => setAvatarUrl(e.target.value)}
-              />
-            </Stack>
-            <Button
-              onClick={handleUpdateAvatar}
-              variant="outlined"
+              spacing="20px"
               sx={{
-                height: "50px",
-                border: "1px solid #000",
-                paddingY: "10px",
-                borderRadius: "0",
-                color: "#000",
-                bgcolor: "#fff",
-                fontSize: "19px",
-                "&:hover": {
-                  bgcolor: "#fff",
+                width: {
+                  md: "100%",
+                },
+                marginLeft: {
+                  md: "20px",
                 },
               }}
             >
-              CHANGE AVATAR
-            </Button>
+              <Stack
+                direction="column"
+                justifyContent="space-between"
+                alignItems="flex-start"
+              >
+                <Typography variant="h6" fontWeight="400" fontSize="19px">
+                  AVATAR URL
+                </Typography>
+                <TextField
+                  placeholder="avatar image url"
+                  fullWidth
+                  sx={{
+                    "& fieldset": { borderRadius: "0" },
+                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      border: "1px solid #000",
+                      borderRadius: "0",
+                    },
+                  }}
+                  name="imgurl"
+                  value={avatarUrl}
+                  onChange={(e) => setAvatarUrl(e.target.value)}
+                />
+              </Stack>
+              <Button
+                onClick={handleUpdateAvatar}
+                variant="outlined"
+                sx={{
+                  height: "50px",
+                  border: "1px solid #000",
+                  paddingY: "10px",
+                  borderRadius: "0",
+                  color: "#000",
+                  bgcolor: "#fff",
+                  fontSize: "19px",
+                  "&:hover": {
+                    bgcolor: "#fff",
+                  },
+                }}
+              >
+                CHANGE AVATAR
+              </Button>
             </Stack>
           </Box>
           <Stack direction="column" spacing="50px">
@@ -362,9 +388,9 @@ function UserDetail() {
                     <Typography variant="h6" fontWeight="400" fontSize="19px">
                       ADDRESS
                     </Typography>
-                    {formInfo.errors.phone && formInfo.touched.phone && (
+                    {formInfo.errors.address && formInfo.touched.address && (
                       <Typography color="red" fontWeight="600">
-                        {formInfo.errors.phone}
+                        {formInfo.errors.address}
                       </Typography>
                     )}
                   </Stack>

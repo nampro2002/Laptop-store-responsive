@@ -8,7 +8,9 @@ import { useAppDispatch } from "../../redux/hooks";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { Stack } from "@mui/joy";
 import { formatPrice } from "../../Util/formatPrice";
-import './style.css'
+import "./style.css";
+import { Toast } from "../../Util/toastify";
+import { ToastContainer } from "react-toastify";
 const StyledBox = styled("div")({
   // border:'1px solid #000'
   backgroundColor: "#E3E3E3",
@@ -30,7 +32,14 @@ function ComponentProdCarousel({ product }: ComponentProdCarouselProps) {
     if (!userInfo.id) {
       return navigate("/login");
     } else {
-      dispatch(CheckCart({ productId, quantity, userId }));
+      dispatch(CheckCart({ productId, quantity, userId }))
+        .unwrap()
+        .then(() => {
+          Toast.notify(`đã thêm vào giỏ hàng 1 ${product.name}`);
+        })
+        .catch((error) => {
+          Toast.error("Lỗi");
+        });
     }
   };
   const handleToProductDetail = (productId: string) => {
@@ -57,27 +66,42 @@ function ComponentProdCarousel({ product }: ComponentProdCarouselProps) {
         },
       }}
     >
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
       <StyledBox className="product">
         <Box
-          sx={{ cursor: "pointer",
-          width: {
-            xl: "100%",
-            lg: "100%",
-            md: "80%",
-            sm: "70%",
-            xs: "80%",
-          },
-        }}
+          sx={{
+            cursor: "pointer",
+            width: {
+              xl: "100%",
+              lg: "100%",
+              md: "80%",
+              sm: "70%",
+              xs: "80%",
+            },
+          }}
           onClick={() => handleToProductDetail(product.id)}
         >
           <img
-          className="prod-car-img"
+            className="prod-car-img"
             src={product.imageUrl1}
             alt=""
             width="350px"
-            style={{              
-              // borderRadius: "25px",
-            }}
+            style={
+              {
+                // borderRadius: "25px",
+              }
+            }
           />
         </Box>
         {/* <Box position="absolute" top="5%" paddingLeft="10px">

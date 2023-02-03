@@ -11,7 +11,10 @@ import SwiperDetail from "./SwiperDetail";
 import "./style.css";
 import ProductRating from "../../components/ProductRating";
 import { formatPrice } from "../../Util/formatPrice";
+import { Toast } from "../../Util/toastify";
+import { ToastContainer } from "react-toastify";
 function ProductDetail() {
+  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
   const [searchParam] = useSearchParams();
   const navigate = useNavigate();
   const productId = searchParam.get("productId");
@@ -22,7 +25,6 @@ function ProductDetail() {
 
   const productInformation = productsList.find((prod) => prod.id === productId);
   const [quantity, setQuantity] = useState(1);
-  const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
   const userId = userInfo.id;
   const dispatch = useAppDispatch();
   const handleSetQuantity = (value: string) => {
@@ -38,7 +40,16 @@ function ProductDetail() {
     }
   };
   const handleAddToCart = (productId: string, quantity: number) => {
-    dispatch(CheckCart({ productId, quantity, userId }));
+    dispatch(CheckCart({ productId, quantity, userId }))
+      .unwrap()
+      .then(() => {
+        Toast.notify(
+          `đã thêm vào giỏ hàng ${quantity} ${productInformation?.name}`
+        );
+      })
+      .catch((error) => {
+        Toast.error("Lỗi");
+      });
   };
 
   const listImg = [
@@ -49,6 +60,18 @@ function ProductDetail() {
   ];
   return (
     <Box>
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
       {productInformation && (
         <>
           <Box
@@ -122,7 +145,6 @@ function ProductDetail() {
                     sm: "0!important",
                     xs: "0!important",
                   },
-                  
                 }}
               />
               <Typography
