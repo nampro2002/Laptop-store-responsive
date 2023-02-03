@@ -159,15 +159,26 @@ function UserDetail() {
             },
           }}
         >
-          <Stack
-            direction="column"
-            spacing="30px"
+          <Box
+            // direction="column"
+            // spacing="30px"
+            display="flex"
             bgcolor="#fff"
             sx={{
+              flexDirection: {
+                xl: "column",
+                lg: "column",
+                md: "row",
+                sm: "column",
+                xs: "column",
+              },
               padding: "30px",
               height: {
                 xl: "100%",
                 lg: "100%",
+              },
+              alignItems: {
+                md: "center",
               },
             }}
           >
@@ -189,17 +200,23 @@ function UserDetail() {
               sx={{
                 width: {
                   xl: "500px",
-                  lg: "500px",                
+                  lg: "500px",  
+                  md: "300px",
+                  sm: "column",
+                  xs: "column",              
                 },
                 height: {
                   xl: "500px",
-                  lg: "500px",                
+                  lg: "500px", 
+                  md: "row",
+                  sm: "column",
+                  xs: "column",               
                 },
               }}
               >
                 <img src={avatarUrl} alt="" width="100%" height="100%" />
               </Box>
-              <Box mt="15px" ml="15px">
+              {/* <Box mt="15px" ml="15px">
                 <Typography variant="h6" fontWeight="400">
                   Name: {userInfo.name}
                 </Typography>
@@ -209,8 +226,16 @@ function UserDetail() {
                 <Typography variant="h6" fontWeight="400">
                   Address: {userInfo.address}
                 </Typography>
-              </Box>
+              </Box> */}
             </Box>
+            <Stack  direction="column" spacing="20px" sx={{
+               width: {
+                md: "100%",
+              },
+               marginLeft: {
+                md: "20px",
+              },
+            }}>
             <Stack
               direction="column"
               justifyContent="space-between"
@@ -252,7 +277,8 @@ function UserDetail() {
             >
               CHANGE AVATAR
             </Button>
-          </Stack>
+            </Stack>
+          </Box>
           <Stack direction="column" spacing="50px">
             <form onSubmit={formInfo.handleSubmit}>
               <Stack

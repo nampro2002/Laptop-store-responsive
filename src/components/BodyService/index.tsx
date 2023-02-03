@@ -28,14 +28,14 @@ function BodyService() {
             sm: "center",
             xs: "center",
           },
-          borderTopLeftRadius: {
+          borderTopRightRadius: {
             xl: "25px",
             lg: "25px",
             md: "0",
             sm: "0",
             xs: "0",
           },
-          borderBottomLeftRadius: {
+          borderBottomRightRadius: {
             xl: "25px",
             lg: "25px",
             md: "0",
@@ -75,7 +75,7 @@ function BodyService() {
             need. Please call our toll free number 800 122 22 20 to arrange a
             visit, or visit one of our Showrooms.
           </Typography>
-          <Button
+          {/* <Button
             variant="outlined"
             sx={{
               color: "#000",
@@ -89,7 +89,7 @@ function BodyService() {
             }}
           >
             LEARN MORE
-          </Button>
+          </Button> */}
         </Stack>
         <Box
           sx={{
@@ -196,7 +196,7 @@ function BodyService() {
             need. Please call our toll free number 800 122 22 20 to arrange a
             visit, or visit one of our Showrooms.
           </Typography>
-          <Button
+          {/* <Button
             variant="outlined"
             sx={{
               color: "#000",
@@ -210,7 +210,7 @@ function BodyService() {
             }}
           >
             LEARN MORE
-          </Button>
+          </Button> */}
         </Stack>
         <Box
           sx={{
@@ -247,14 +247,14 @@ function BodyService() {
             sm: "center",
             xs: "center",
           },
-          borderTopLeftRadius: {
+          borderTopRightRadius: {
             xl: "25px",
             lg: "25px",
             md: "0",
             sm: "0",
             xs: "0",
           },
-          borderBottomLeftRadius: {
+          borderBottomRightRadius: {
             xl: "25px",
             lg: "25px",
             md: "0",
@@ -294,7 +294,7 @@ function BodyService() {
             need. Please call our toll free number 800 122 22 20 to arrange a
             visit, or visit one of our Showrooms.
           </Typography>
-          <Button
+          {/* <Button
             variant="outlined"
             sx={{
               color: "#000",
@@ -308,7 +308,7 @@ function BodyService() {
             }}
           >
             LEARN MORE
-          </Button>
+          </Button> */}
         </Stack>
         <Box
           sx={{

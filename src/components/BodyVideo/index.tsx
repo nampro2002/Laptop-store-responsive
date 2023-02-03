@@ -87,7 +87,7 @@ function BodyVideo() {
               <li>IMPROVED HOME RESALE VALUE</li>
               <li>A SMART WAY TO LEED CERTIFICATION</li>
             </Typography>
-            <Button
+            {/* <Button
               variant="contained"
               sx={{
                 paddingY: "9px",
@@ -102,7 +102,7 @@ function BodyVideo() {
               }}
             >
               LEARN MORE
-            </Button>
+            </Button> */}
           </Stack>
         </Stack>
       </Box>

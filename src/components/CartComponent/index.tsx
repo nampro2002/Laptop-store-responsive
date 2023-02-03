@@ -132,9 +132,9 @@ function CartComponent({ cartProduct }: CartComponentProps) {
               fontWeight="500"
               sx={{
                 marginRight: {
-                  xl: "0",
-                  lg: "0",
-                  md: "0",
+                  xl: "10px",
+                  lg: "10px",
+                  md: "10px",
                   sm: "10px",
                   xs: "0",
                 },
